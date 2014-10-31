@@ -50,21 +50,12 @@ $active_plugins = get_option("active_plugins");
 	{
 		if (isset($_REQUEST['page']) && ($_REQUEST['page'] == WP_CONST_ULTIMATE_CRM_CPT_SLUG.'/index.php' || $_REQUEST['page'] == 'page')) {
 			wp_enqueue_style('main-style', plugins_url('css/mainstyle.css', __FILE__));
-			wp_enqueue_style('jquery-ui', plugins_url('css/jquery-ui.css', __FILE__));
 			wp_enqueue_style('common-crm-free-bootstrap-css', plugins_url('css/bootstrap.css', __FILE__));
 			wp_enqueue_style('common-crm-free-font-awesome-css', plugins_url('css/font-awesome/css/font-awesome.css', __FILE__));
-
 			wp_register_script('common-crm-free-bootstrap-min-js', plugins_url('js/bootstrap.min.js', __FILE__));
 			wp_enqueue_script('common-crm-free-bootstrap-min-js');
-
 			wp_register_script('basic-action-js', plugins_url('js/basicaction.js', __FILE__));
 			wp_enqueue_script('basic-action-js');
-
-			wp_register_script('jquery-js', plugins_url('js/jquery.js', __FILE__));
-			wp_enqueue_script('jquery-js');
-
-			wp_register_script('jquery-min-js', plugins_url('js/jquery.min.js', __FILE__));
-			wp_enqueue_script('jquery-min-js');
 		}
 	}
 
@@ -74,6 +65,8 @@ $active_plugins = get_option("active_plugins");
 		if(!is_admin())
 		{
 			wp_enqueue_style('front-end-styles' , plugins_url('css/frontendstyles.css', __FILE__) );
+			wp_enqueue_script('jquery-ui-datepicker');
+			wp_enqueue_style('jquery-datepicker-css', plugins_url('css/datepicker.css', __FILE__) );
 		}
 	}
 
