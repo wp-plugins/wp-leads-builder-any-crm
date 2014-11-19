@@ -110,7 +110,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 	}
 	else
 	{
-
+		$iscontent = true;
 		$content.='<table><tr class="smack_highlight smack_alt"><th class="smack-field-td-middleit" style="width: 50px;" align="left"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th style="width: 200px;" align="left"><h5>Field Name</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Show Field</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Order</h5></th></tr>';
 
 		for($i=0;$i<count($config_leads_fields['fields']);$i++)
@@ -188,7 +188,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 	</div>
 	';
 			//
-	return $content;
+	return array( 'iscontent' => $iscontent , 'data' => $content);
 }
 
 
@@ -217,14 +217,27 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 		<div id="fieldtable">
 		<?php
 		if(isset($skinnyData['REQUEST']['EditShortCode']))
-			echo formFields( $skinnyData['option'] , $skinnyData['onAction'] , $skinnyData['REQUEST']['EditShortCode'] , $skinnyData['formtype'] );
+		{
+			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , $skinnyData['REQUEST']['EditShortCode'] , $skinnyData['formtype'] );
+			echo $return_data['data'];
+		}
 		else
-			echo formFields( $skinnyData['option'] , $skinnyData['onAction'] , '' , $skinnyData['formtype'] );
-
+		{
+			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , '' , $skinnyData['formtype'] );
+			echo $return_data['data'];
+		}
 		?>
 		</div>
 	</div>
 	<br>
+	
+	<div id="crmfield"
+	<?php if(!$return_data['iscontent'])
+	{ 
+		echo "style='display:none'"; 
+	} 
+	?>
+	>
 	<h3> Form Settings </h3>
         <div class="wp-common-crm-content">
 
@@ -386,7 +399,7 @@ function showAccordion( id )
 		</div>		
         </div>
         <br>
-	<h3> Save Field Settings </h3>
+	
         <div class="wp-common-crm-content">
 	<?php
 		$content = "";

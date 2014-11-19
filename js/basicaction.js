@@ -146,6 +146,7 @@ function syncCrmFields(siteurl, module, option, onAction)
                 success:function(data) {
 			jQuery("#fieldtable").html(data);
 			document.getElementById('loading-image').style.display = "none";
+			document.getElementById('crmfield').style.display = 'block';
 			//location.reload();
                 },
                 error: function(errorThrown){

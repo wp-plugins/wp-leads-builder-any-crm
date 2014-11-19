@@ -32,6 +32,7 @@ class WpsalesforceSettingsActions extends SkinnyActions {
 			'user_capture' => __('User Capture'),
 			'smack_email' => __('Smack Email'),
                          'email' => __('Email id'),
+			 'debug_mode' => __('Debug Mode'),
 
 
 

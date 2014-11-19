@@ -64,6 +64,7 @@
                                 <input type='checkbox' class='smack-vtiger-settings-text' name='smack_email' id='smack_email' value="on" <?php if(isset($config['smack_email']) && $config['smack_email'] == 'on') { echo "checked=checked"; } ?>/>
                         </td>
                 </tr>
+		<tr><td><br></td></tr>
                 <tr>
                         <td style='width:160px;'>
                                 <label><div style='float:left;'> Email Id </div></label>
@@ -71,6 +72,18 @@
                         <td>
                     		 <input type='text' class='smack-sugar-pro-settings-text' name='email' id='email' value="<?php echo $config['email'] ?>"/>
                         </td>
+                </tr>
+</table>
+		 <tr><td><br></td></tr>
+       <table>
+		<h5  style="font-weight:bold;">Debug Mode</h5>
+		 <tr>
+                                <td style='width:160px;'>
+                                        <label><div style='float:left;'> Enable Debug Mode  </div></label>
+                                </td>
+                                <td>
+                                        <input type='checkbox' class='smack-vtiger-settings-text' name='debug_mode' id='debug_mode' value="on" <?php if(isset($config['debug_mode']) && $config['debug_mode'] == 'on') { echo "checked=checked"; } ?>/>
+                                </td>
                 </tr>
 
 

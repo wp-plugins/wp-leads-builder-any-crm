@@ -31,12 +31,12 @@ class ContactFormPlugins
 			if($this->getActivePlugin() == $pluginslug )
 			{
 				
-				$select_option .= "<option value='{$pluginslug}' selected=selected > {$pluginslug} </option>";
+				$select_option .= "<option value='{$pluginslug}' selected=selected > {$pluginlabel} </option>";
 
 			}
 			else
 			{
-				$select_option .= "<option value='{$pluginslug}' > {$pluginslug} </option>" ;
+				$select_option .= "<option value='{$pluginslug}' > {$pluginlabel} </option>" ;
 			}
 
 		}

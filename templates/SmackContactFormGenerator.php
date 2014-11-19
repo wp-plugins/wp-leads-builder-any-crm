@@ -184,7 +184,7 @@ function callCurlFREE( $formtype )
 
 	$config = get_option("wp_{$activatedplugin}_settings");
 
-	if(preg_match("/$module entry is added./",$data)) {
+	if(preg_match("/{$config_fields['module']} entry is added./",$data)) {
 
 			$success++;
 		
@@ -192,9 +192,9 @@ function callCurlFREE( $formtype )
 			$successfulAttemptsOption['success'] = $success;
 			$sendmail = mailsend( $config,$activatedplugin,$formtype,$plugin_url, "Success" , $contenttype );
 			update_option( "wp-{$activatedplugin}-contact-{$formtype}-form-attempts",$successfulAttemptsOption );
-			if( isset($config_fields['enableurlredirection']) && ($config_fields['enableurlredirection'] == "on") && isset($config_fields['redirecturl']) && ( $config_fields['redirecturl'] !== "" ) )
+			if( isset($config_fields['enableurlredirection']) && ($config_fields['enableurlredirection'] == "on") && isset($config_fields['redirecturl']) && ( $config_fields['redirecturl'] !== "" ) && is_numeric($config_fields['redirecturl']) )
 			{
-				wp_redirect($config_fields['redirecturl']);
+				wp_redirect(get_permalink($config_fields['redirecturl']));
 			}
 		//	return("successful");
         

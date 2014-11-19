@@ -3,8 +3,8 @@ Contributors: smackcoders
 Tags: crm, admin, administration, automatic, contact, form, list, newsletter, plugin, shortcode, sidebar, widget, widgets, wordpress, vtiger, lead, wptiger, lead capture, form generator, form builder, contact sync, vtiger crm, optin form, form
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0.0
-Version: 1.0.0
+Stable tag: 1.0.1
+Version: 1.0.1
 Author: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 License: GPLv2 or later
@@ -86,11 +86,20 @@ III. Straight from Wordpress Admin
  
 == Changelog ==
 
+= 1.0.1 =
+
+* Added: Debug mode enable / disable option in settings module.
+* Added: Menu order to avoid blank screen.
+
 = 1.0.0 =
 
 Initial combined release version of wp tiger, wp zoho free and wp sugar free plugin
 
 == Upgrade Notice ==
+
+= 1.0.1 = 
+
+Upgrade now for dynamic debug enable / disable feature.
 
 = 1.0.0 =
 

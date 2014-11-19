@@ -41,7 +41,9 @@ class WptigerSettingsActions extends SkinnyActions {
 
 			'user_capture' => __('User Capture'),
 			'smack_email' => __('Smack Email'),
-                         'email' => __('Email id'),
+                         'email' => __('Email id'),	
+			 'debug_mode' => __('Debug Mode'),
+
 //			'smack_host_app_key' => __('Application Key'),
 /*			'recaptcha_public_key' => __('Recaptcha Public Key'),
 			'recaptcha_private_key' => __('Recaptcha Private Key'),
