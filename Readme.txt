@@ -12,6 +12,7 @@ License: GPLv2 or later
 An easy automated and advanced leads builder for Wordpress to capture leads to one of your favourite CRM.
 
 == Description ==
+
 Leads Builder For Any CRM is a common plugin that can handle VTiger, sugar crm, zoho crm and Sales force to capture or build leads directly from your wordpress site. Now you can generate forms directly in wordpress admin without any complicated html web forms. Generate web forms via user friendly plugin interface in few simple clicks as a short code. Use the short code which in turn used as a form in post, page or widget to convert your traffic/visitors as high potential leads to favourite CRM. 
 
 Just Few Simple Steps
@@ -40,6 +41,8 @@ Advantage than default html web form methods
 - Sales force and zoho crm
 - More Options 
 
+Kindly click here to read more about 
+[Leads Builder For Any CRM Pro features and live demo](https://www.smackcoders.com/store/wp-leads-builder-any-crm-pro.html)
 
 == Installation ==
 WP Leads Builder Any CRM WP Leads Builder Any CRM is very easy to install like any other wordpress plugin. No need to edit or modify anything here. Users can install the plugin in 3 ways, choose one that suites you from below
