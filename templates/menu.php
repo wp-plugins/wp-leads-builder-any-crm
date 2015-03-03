@@ -24,4 +24,4 @@
       </ul>
    </div>
 </nav>
-
+<p style="text-align:center;font-size:15px;color:red;"> Alert: Old plugin is still active, deactivate and delete it now.</p>

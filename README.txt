@@ -2,9 +2,9 @@
 Contributors: smackcoders
 Tags: crm, admin, administration, automatic, contact, form, list, newsletter, plugin, shortcode, sidebar, widget, widgets, wordpress, vtiger, lead, wptiger, lead capture, form generator, form builder, contact sync, vtiger crm, optin form, form
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 1.0.1
-Version: 1.0.1
+Tested up to: 4.1.1
+Stable tag: 1.1
+Version: 1.1
 Author: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 License: GPLv2 or later
@@ -12,7 +12,6 @@ License: GPLv2 or later
 An easy automated and advanced leads builder for Wordpress to capture leads to one of your favourite CRM.
 
 == Description ==
-
 Leads Builder For Any CRM is a common plugin that can handle VTiger, sugar crm, zoho crm and Sales force to capture or build leads directly from your wordpress site. Now you can generate forms directly in wordpress admin without any complicated html web forms. Generate web forms via user friendly plugin interface in few simple clicks as a short code. Use the short code which in turn used as a form in post, page or widget to convert your traffic/visitors as high potential leads to favourite CRM. 
 
 Just Few Simple Steps
@@ -41,8 +40,6 @@ Advantage than default html web form methods
 - Sales force and zoho crm
 - More Options 
 
-Kindly click here to read more about 
-[Leads Builder For Any CRM Pro features and live demo](https://www.smackcoders.com/store/wp-leads-builder-any-crm-pro.html)
 
 == Installation ==
 WP Leads Builder Any CRM WP Leads Builder Any CRM is very easy to install like any other wordpress plugin. No need to edit or modify anything here. Users can install the plugin in 3 ways, choose one that suites you from below
@@ -89,6 +86,10 @@ III. Straight from Wordpress Admin
  
 == Changelog ==
 
+= 1.1 =
+
+* Migration script from wp tiger, wp sugar free, wp zoho free plugins
+
 = 1.0.1 =
 
 * Added: Debug mode enable / disable option in settings module.
@@ -99,6 +100,10 @@ III. Straight from Wordpress Admin
 Initial combined release version of wp tiger, wp zoho free and wp sugar free plugin
 
 == Upgrade Notice ==
+
+= 1.1 =
+
+Imp: Upgrade immediately
 
 = 1.0.1 = 
 
