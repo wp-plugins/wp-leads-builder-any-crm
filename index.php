@@ -2,7 +2,7 @@
 /******************************
 Plugin Name: WP Leads Builder For Any CRM 
 Description: A plugin that helps to capture leads.
-Version: 1.1
+Version: 1.1.1
 Author: smackcoders.com
 Plugin URI: http://www.smackcoders.com
 Author URI: http://www.smackcoders.com
