@@ -171,7 +171,7 @@ class WPCapture_includes_helper {
 				$zoho_settings['user_capture'] = 'on';
 			if($debug_mode == 'on')
                                 $zoho_settings['debug_mode'] = 'on';
-			//echo '<pre>';print_r($zoho_settings);die('kavi');
+			
 			update_option('wp_wpzohofree_settings', $zoho_settings);
 		}
 		

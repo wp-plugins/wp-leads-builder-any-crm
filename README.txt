@@ -1,10 +1,10 @@
 === Leads Builder For Any CRM ===
 Contributors: smackcoders
 Tags: crm, admin, administration, automatic, contact, form, list, newsletter, plugin, shortcode, sidebar, widget, widgets, wordpress, vtiger, lead, wptiger, lead capture, form generator, form builder, contact sync, vtiger crm, optin form, form
-Requires at least: 3.8
-Tested up to: 4.1.1
-Stable tag: 1.1
-Version: 1.1
+Requires at least: 4.2
+Tested up to: 4.3
+Stable tag: 1.1.1
+Version: 1.1.1
 Author: smackcoders
 Donate link: http://www.smackcoders.com/donate.html
 License: GPLv2 or later
@@ -86,6 +86,17 @@ III. Straight from Wordpress Admin
  
 == Changelog ==
 
+= 1.1.1 =
+
+* Fixed: ../../../../wp-load.php is removed and wordpress ajax call is used.
+* Fixed : Removed the wp-content that are directly used in some files.
+* Added: Checked the ABSPATH in each file.
+* Fixed: Upload media zip option problem is fixed.
+* Fixed: Featured image issue is fixed.
+* Fixed: All warnings are fixed.
+* Fixed: All minor bugs are fixed.
+* Fixed: All typeErrors are fixed.
+
 = 1.1 =
 
 * Migration script from wp tiger, wp sugar free, wp zoho free plugins
@@ -104,6 +115,15 @@ Initial combined release version of wp tiger, wp zoho free and wp sugar free plu
 = 1.1 =
 
 Imp: Upgrade immediately
+
+= 1.1.1 = 
+
+Upgrade now to get issue fixes and improvements.
+
+= 1.1 = 
+
+Upgrade now for new version.
+
 
 = 1.0.1 = 
 

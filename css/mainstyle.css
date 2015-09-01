@@ -1,3 +1,53 @@
+
+#innerhead h3
+{
+background-color: #37707D;
+color: #FFFFFF !important;
+font-family: "Open Sans",sans-serif !important;
+font-size: 16px !important;
+font-weight: 700 !important;
+margin-top: -10px;
+//margin: 6px 0 15px 20px;
+padding: 25px;
+
+}
+
+
+#innerheader {
+background-color: #37707D;
+color: #FFFFFF !important;
+font-family: "Open Sans",sans-serif !important;
+font-size: 16px !important;
+font-weight: 700 !important;
+margin-top: -10px;
+//margin: 6px 0 15px 20px;
+padding: 25px; 
+} 
+
+
+#inneroptions {
+color: #004d40 !important;
+font-family: "Open Sans",sans-serif !important;
+font-size: 14px !important;
+font-weight: bold !important;
+}
+
+#innertext {
+    color: #004d40 !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    font-family: "Open Sans",sans-serif !important;
+}
+
+#formtext {
+color: #333 !important;
+font-family: "Open Sans",sans-serif !important;
+font-size: 14px !important;
+font-weight: 700 !important;
+/*margin: 6px 0 15px 0px;	*/
+/*padding: 10px 0px; */
+}
+
 .headertabs
 {
 	margin-top:30px;
@@ -77,7 +127,7 @@ th.smack-crm-free-list-view-th {
 }
 
 .smack-crm-pro-alt{
-    background-color: #f9f9f9;
+    background-color: #F9F9F9;
 }
 
 p.display_success {
@@ -115,10 +165,11 @@ p.display_failure {
 }
 
 .wp-common-crmwrapper{
-	background-color: #fff;
+	background-color: #FAFAFA;
 	padding: 10px 0px 10px 0px;
 	overflow: hidden;
 	margin-right: 25px;
+	margin-top: 20px;
 }
 
 .wp-common-crmwrapper h3{
@@ -139,7 +190,7 @@ p.display_failure {
 }
 
 .wp-common-crm-content{
-	padding-left: 20px;
+	padding-left: 20px; 
 }
 
 

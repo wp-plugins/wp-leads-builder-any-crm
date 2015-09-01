@@ -12,7 +12,7 @@ $content='
 	{
 	//	$content .= '<tr><td>';
 		$content .='<div id="fieldtable">';
-		$content.='<table><tr class="smack_highlight smack_alt"><th class="smack-field-td-middleit" align="left" style="width: 50px;"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th align="left" style="width: 200px;"><h5>Field Name</h5></th><th class="smack-field-td-middleit" align="left" style="width: 100px;"><h5>Show Field</h5></th><th class="smack-field-td-middleit" align="left" style="width: 100px;"><h5>Order</h5></th></tr>';
+		$content.='<table style="background-color: #F1F1F1; border: 1px solid #dddddd;width:85%;margin-bottom:26px;margin-top:5px"><tr class="smack_highlight smack_alt" style="border-bottom: 1px solid #dddddd;"><th class="smack-field-td-middleit" align="left" style="width: 40px;"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th align="left" style="width: 100px;"><h5>Field Name</h5></th><th class="smack-field-td-middleit" align="left" style="width: 100px;"><h5>Show Field</h5></th><th class="smack-field-td-middleit" align="left" style="width: 150px;"><h5>Order</h5></th></tr>';
 
 	//	$content.='<table class="smack-table-populate"><tr class="smack_alt"><th style="width: 50px;"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th style="width: 200px;"><h5>Field Name</h5></th><th style="width: 100px;"><h5>Show Field</h5></th><th style="width: 100px;"><h5>Order</h5></th><th style="width: 120px;"><h5>Mandatory Fields</h5></th><th style="width: 200px;"><h5>Field Label Display</h5></th></tr>';
 		$imagepath=WP_CONST_ULTIMATE_CRM_CPT_DIR.'images/';
@@ -57,13 +57,9 @@ $content='
 
 				$content1.='<td class="smack-field-td-middleit">';
 
-                                if($config_fields['fields'][$i]['publish'] == 1){
-                                        $content1.= '<input type="checkbox" name="select'.$i.'" id="select'.$i.'" checked=checked >';
-                                }
-                                else
-                                {
+                              
                                         $content1.= '<input type="checkbox" name="select'.$i.'" id="select'.$i.'">';
-                                }
+                                
 
 				//<input type="checkbox" name="select'.$i.'" id="select'.$i.'">
 				$content1.= '</td>

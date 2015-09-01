@@ -1,93 +1,11 @@
 <?php
  /* Put your code here */ 
 
-function saveFormFields( $options , $onAction , $editShortCodes , $formtype = "post" )
-{
-	$HelperObj = new WPCapture_includes_helper();
-	$module = $HelperObj->Module;
-	$moduleslug = $HelperObj->ModuleSlug;
-	$activatedplugin = $HelperObj->ActivatedPlugin;
-	$activatedpluginlabel = $HelperObj->ActivatedPluginLabel;
-
-	$save_field_config = array();
-
-	$config_fields = get_option( "smack_{$activatedplugin}_lead_{$formtype}_field_settings" );
-
-	if( !is_array( $config_fields ) )
-	{
-		$config_fields = get_option("smack_{$activatedplugin}_{$moduleslug}_fields-tmp");	
-	}
-
-	foreach( $config_fields as $shortcode_attributes => $fields )
-	{
-		if($shortcode_attributes == "fields")
-		{
-			foreach( $fields as $key => $field )
-			{
-				$save_field_config["fields"][$key] = $field;
-				if( !isset($field['mandatory']) || $field['mandatory'] != 2 )
-				{
-					if(isset($_POST['select'.$key]))
-					{
-						$save_field_config['fields'][$key]['publish'] = 1;
-					}
-					else
-					{
-						$save_field_config['fields'][$key]['publish'] = 0;
-					}
-				}
-				else
-				{
-					$save_field_config['fields'][$key]['publish'] = 1;
-				}
-			}
-		}
-		else
-		{
-			$save_field_config[$shortcode_attributes] = $fields;
-		}
-	}
-
-	$extra_fields = array( "enableurlredirection" , "redirecturl" , "errormessage" , "successmessage");
-
-	foreach( $extra_fields as $extra_field )
-	{
-		if(isset( $_POST[$extra_field]))
-		{
-			$save_field_config[$extra_field] = $_POST[$extra_field];
-		}
-		else
-		{
-			unset($save_field_config[$extra_field]);
-		}
-	}
-
-	for( $i = 0; $i < $_REQUEST['no_of_rows']; $i++ )
-	{
-		$REQUEST_DATA[$i] = $_REQUEST['position'.$i];
-	}
-
-	asort($REQUEST_DATA);
-
-	$i = 0;
-	foreach( $REQUEST_DATA as $key => $value )
-	{
-		$Ordered_field_config['fields'][$i] = $save_field_config['fields'][$key];
-		$i++;
-	}
-
-	$save_field_config['fields'] = $Ordered_field_config['fields']; 
-
-	update_option("smack_{$activatedplugin}_lead_{$formtype}_field_settings", $save_field_config);
-	update_option("smack_{$activatedplugin}_{$moduleslug}_fields-tmp" , $save_field_config);
-
-	$data['display'] = "<p class='display_success'> Field Settings Saved </p>";
-
-	return $data;
-}
 
 function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 {
+
+
 	$siteurl= site_url();
 	$module =$module_options ='Leads';
 	$content1='';
@@ -100,7 +18,8 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 
 	$config_leads_fields = get_option($options);
 
-	$content='
+
+$content='
 	<input type="hidden" name="field-form-hidden" value="field-form" />
 	<div>';
 	$i = 0;
@@ -111,7 +30,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 	else
 	{
 		$iscontent = true;
-		$content.='<table ><tr class="smack_highlight smack_alt"><th class="smack-field-td-middleit" style="width: 50px;" align="left"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th style="width: 200px;" align="left"><h5>Field Name</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Show Field</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Order</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Mandatory</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Field Label Display</h5></th></tr>';
+		$content.='<table style="background-color: #F1F1F1; border: 1px solid #dddddd;width:85%;margin-bottom:26px;margin-top:5px"><tr class="smack_highlight smack_alt" style="border-bottom: 1px solid #dddddd;"><th class="smack-field-td-middleit" style="width: 40px;" align="left"><input type="checkbox" name="selectall" id="selectall" onclick="selectAll'."('field-form','".$module."')".';"/></th><th style="width: 100px;" align="left"><h5>Field Name</h5></th><th class="smack-field-td-middleit" style="width: 100px;" align="left"><h5>Show Field</h5></th><th class="smack-field-td-middleit" style="width: 150px;" align="left"><h5>Order</h5></th></tr>';
 
 		for($i=0;$i<count($config_leads_fields['fields']);$i++)
 		{
@@ -153,16 +72,15 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 				$content1.='<tr class="smack_highlight">';
 
 				$content1.='<td class="smack-field-td-middleit">';
-				if($config_leads_fields['fields'][$i]['publish'] == 1){
-					$content1.= '<input type="checkbox" name="select'.$i.'" id="select'.$i.'" checked=checked >';
-				}
-				else
-				{
+				
+
 					$content1.= '<input type="checkbox" name="select'.$i.'" id="select'.$i.'">';
-				}
+				
+				
 				$content1.='</td>
 				<td>'.$config_leads_fields['fields'][$i]['label'].'</td>
 				<td class="smack-field-td-middleit">';
+
 				if($config_leads_fields['fields'][$i]['publish'] == 1){
 					$content1.='<a name="publish'.$i.'" id="publish'.$i.'" >
 					<img src="' . WP_CONST_ULTIMATE_CRM_CPT_DIR . 'images/tick.png"/>
@@ -192,7 +110,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 }
 
 
-	if (isset ($_POST ['formtype'])) {
+/*	if (isset ($_POST ['formtype'])) {
 		$data = saveFormFields( $skinnyData['option'] , $skinnyData['onAction'] , $skinnyData['REQUEST']['EditShortCode'] , $skinnyData['formtype'] );
 
 		if( isset($data['display']) )
@@ -200,69 +118,68 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 			echo $data['display'];
 		}
 	}
+*/
+?>
+	<form id="field-form" name = "fieldform" action="<?php echo WP_CONST_ULTIMATE_CRM_CPT_PLUG_URL.'&__module=ManageShortcodes&__action=ManageFields&module=Leads&EditShortCode=yes&formtype='.$skinnyData['formtype']; ?>" method="post">
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+<h4>    
+
+
+
+</h4>
+
+<?php
+
+global $IncludedPlugins;
+$crmtype = $IncludedPlugins[$skinnyData['activatedplugin']];
 
 ?>
-	<form id="field-form" name = "fieldform" action="<?php echo WP_CONST_ULTIMATE_CRM_CPT_PLUG_URL.'&__module=ManageFields&__action=view&module=Leads&EditShortCode=yes'; ?>" method="post">
 
-	<h3 id="innerheader">
-		<?php echo $skinnyData['activatedpluginlabel'] . " " . rtrim( $skinnyData['module'] , "s") ; ?> Fields
-		<input style="float:right;" type="button" class="button-secondary submit-add-to-menu" name="sync_crm_fields" value="Fetch CRM Fields" onclick=" syncCrmFields('<?php echo $skinnyData['siteurl'] ;?>','<?php echo $skinnyData['module'] ;?>','<?php echo $skinnyData['options'] ;?>', '<?php echo $skinnyData['onAction'] ;?>');"/>
-	</h3>
-	<div class="wp-common-crm-content">
-		<div class="action-buttons" style="<?php if($skinnyData['onAction'] == 'onCreate') echo 'width:720px;'; else echo 'width:650px;' ?> padding-bottom: 20px; padding-top: 20px;">
+<span id='inneroptions' style='position:relative;left:5px;margin-left:10px;'>
+<?php
 
-			<img src="<?php echo WP_CONST_ULTIMATE_CRM_CPT_DIR; ?>images/loading-indicator.gif" id="loading-image" style="display: none; position:relative; left:500px;padding-top: 5px; padding-left: 15px;">
-			</div>
-		 
+echo "CRM Type: $crmtype";
+echo str_repeat('&nbsp;', 8);
+echo "Module Type: Leads";
 
-<select id="bulk-action-selector-top" name="action" style="margin: 0px 18px 2px;">
-<option selected="selected" value="-1">Bulk Actions</option>
-<option value="enable_field">Enable Field</option>
-<option value="disable_field">Disable Field</option>
-<option value="update_order">Update Order</option>
-<option value="enable_mandatory">Enable Mandatory</option>
-<option value="disable_mandatory">Disable Mandatory</option>
-</select>
-
-
-<input type="hidden" id="savefields" name="savefields" value="Apply"/>
+?>
+</span>
+<br><br>
 
 
 
-		<div id="fieldtable">
-		<?php
-		if(isset($skinnyData['REQUEST']['EditShortCode']))
-		{
-			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , $skinnyData['REQUEST']['EditShortCode'] , $skinnyData['formtype'] );
-			echo $return_data['data'];
-		}
-		else
-		{
-			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , '' , $skinnyData['formtype'] );
-			echo $return_data['data'];
-		}
-		?>
-		</div>
-	</div>
-	<br>
+<h3 style="margin-left:0px; ">
+[<?php  echo $skinnyData['activatedplugin']; ?>-web-form type='<?php echo $skinnyData['formtype'];?>'] 
+
+
+<input style="float:right;" type="button" class="button-secondary submit-add-to-menu" name="sync_crm_fields" value="Fetch CRM Fields" onclick=" syncCrmFields('<?php echo $skinnyData['siteurl'] ;?>','<?php echo $skinnyData['module'] ;?>','<?php echo $skinnyData['options'] ;?>', '<?php echo $skinnyData['onAction'] ;?>');"/>
+
+</h3>
+
+<span  style="padding:10px;  color:#FFFFFF; background-color: #37707D; text-align:center; float:right; font-weight:bold; cursor:pointer; margin-top:-11px; position:relative; overflow:hidden;"  id ="showmore">Form Options <i class="dashicons dashicons-arrow-down"></i></span>
+
+<span  style="padding:10px; color:#FFFFFF; background-color: #37707D; text-align:center; float:right; font-weight:bold; cursor:pointer;  margin-top:209px; margin-right:0px; position:relative; overflow:hidden;"  id ="showless">Form Options <i class="dashicons dashicons-arrow-up"></i></span>
+
+<br><br>
+
+<div class="wp-common-crm-content" style="background-color: white;">
+
+        
 	
-	<div id="crmfield"
-	<?php if(!$return_data['iscontent'])
-	{ 
-		echo "style='display:none'"; 
-	} 
-	?>
-	>
-	<h3> Form Settings </h3>
-        <div class="wp-common-crm-content">
-
+	<div class="content" style="padding: 20px 0px; color:#004D40 !important; font-size:13px !important; font-weight: bold !important; position:relative;margin-top:-45px; ">
 	<table>
 		<tr>
 	<?php
 		$config_fields = get_option($skinnyData['option']);
+		$formtypes = array('post' => "Post" , 'widget' => "Widget" );
+
 		$content = "";
-		$content.= "<td style='width: 25%;'>Form Type  : </td><td style='width: 10%;'><select name='formtype'>";
-		$formtypes = array('post' => "Post" , 'widget' => "Widget");
+		$content.= "<td style='width: 25%; position:relative;'>Form Type  : </td><td style='width: 10%;'><span> {$formtypes[$skinnyData['formtype']]} </span><input type='hidden' name='formtype' value='{$skinnyData['formtype']}'>";
+
+/*
 		$select_option = "";
 		foreach( $formtypes as $formtype_key => $formtype_value )
 		{
@@ -278,11 +195,12 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 
 		$content.= $select_option;
 
-		$content.= "</select></td>";
+		$content.= "</select>";*/
+		$content.= "</td>";
 //		$content.='<input type="hidden" name="formtype" value="'.$formtype.'"/>';
 		echo $content;
 	?>
-		<td style="width: 10%;">
+		<td style="width: 10%; position:relative;">
 			Form Mode : 
 		</td>
 		<td >
@@ -310,7 +228,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 
 		<tr>
 		    <td>
-			<label>Error Message On Form Submission : </label>
+			<label style="position:relative";>Error Message On Form Submission : </label>
 		    </td>
 		    <td>
 			<input type="text" name="errormessage" placeholder = "Submitting Failed" value="<?php if(isset($config_fields['errormessage'])) echo $config_fields['errormessage']; ?>" />
@@ -327,8 +245,8 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 
 		</tr>
 		<tr>
-		    <td>
-			<label>Success Message On Form Submission : </label> 
+		    <td style="position:relative;">
+			<label >Success Message On Form Submission : </label> 
 		    </td>
 		    <td>
 			<input type="text" name="successmessage" placeholder = "Thankyou For Submitting" value="<?php if(isset($config_fields['successmessage'])) echo $config_fields['successmessage']; ?>" />
@@ -346,7 +264,7 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 		</tr>
 		<tr><td><br></td></tr>
 		<tr>
-		    <td>
+		    <td style="position:relative;">
 			<label>Enable URL Redirection : </label>
 		    
 		    
@@ -379,10 +297,65 @@ function formFields( $options, $onAction, $editShortCodes , $formtype = "post" )
 		</tr>
 -->
 	</table>
-
+	</div>
         </div>
         <br>
+
+ 
+	 
+	<div class="wp-common-crm-content">
+<h4 id="formtext" style=" margin:0px; padding: 10px 0px; "> Field Settings :</h4>
+
+		<div class="action-buttons" style="<?php if($skinnyData['onAction'] == 'onCreate') echo 'width:720px;'; else echo 'width:650px;' ?> padding-bottom: 20px; padding-top: 20px;">
+
+			<img src="<?php echo WP_CONST_ULTIMATE_CRM_CPT_DIR; ?>images/loading-indicator.gif" id="loading-image" style="display: none; position:relative; left:500px;padding-top: 5px; padding-left: 15px;">
+			</div>
+		 
+<div class="wp-common-crm-content1">
+<select id="bulk-action-selector-top" name="bulkaction" style="margin: 0px 0px 2px;">
+<option selected="selected" value="-1">Bulk Actions</option>
+<option value="enable_field">Enable Field</option>
+<option value="disable_field">Disable Field</option>
+<option value="update_order">Update Order</option>
+</select>
+
+
+	<?php
+		$content = "";
+//		$content.= '<input type="hidden" id="no_of_fields" value="'.$i.'"/>';
+		$content.= '<input class="button-primary" type="submit" value="Save Field Settings"/>';
+		echo $content;
+	?>		
+        </div>
+
+
+		<div id="fieldtable">
+		<?php
+		if(isset($skinnyData['REQUEST']['EditShortCode']))
+		{
+			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , $skinnyData['REQUEST']['EditShortCode'] , $skinnyData['formtype'] );
+			echo $return_data['data'];
+		}
+		else
+		{
+			$return_data = formFields( $skinnyData['option'] , $skinnyData['onAction'] , '' , $skinnyData['formtype'] );
+			echo $return_data['data'];
+		}
+
+		?>
+		</div>
+	</div>
 	<br>
+	
+	<div id="crmfield"
+	<?php if(!$return_data['iscontent'])
+	{ 
+		echo "style='display:none'"; 
+	} 
+	?>
+	>
+	       
+
 <script>
 function showAccordion( id )
 {
@@ -404,6 +377,26 @@ function showAccordion( id )
 </script>
 
 
+<script>
+$(document).ready(function() {
+        $( ".content" ).hide();
+        $( "#showless" ).hide();
+
+        $( "#showmore" ).click(function() {
+        $( ".content" ).show( 500 );
+        $( "#showless" ).show();
+        $( "#showmore" ).hide();
+        });
+
+        $( "#showless" ).click(function() {
+        $( ".content" ).hide( 500 );
+        $( "#showless" ).hide();
+        $( "#showmore" ).show();
+        });
+        
+});
+</script>
+
 
 
 	<h3 onclick="showAccordion('advance_option');" style=" cursor: pointer;"> Advanced Options <i id="accordion_arrow" style="float: right; color:#FFFFFF;" class="fa fa-chevron-right"></i></h3>
@@ -418,13 +411,4 @@ function showAccordion( id )
         </div>
         <br>
 	
-        <div class="wp-common-crm-content">
-	<?php
-		$content = "";
-//		$content.= '<input type="hidden" id="no_of_fields" value="'.$i.'"/>';
-		$content.= '<input class="button-primary" type="submit" value="Save Field Settings"/>';
-		echo $content;
-	?>		
-        </div>
-        <br>
 </form>

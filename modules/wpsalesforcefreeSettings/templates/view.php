@@ -19,12 +19,7 @@
 		$config['instance_url'] = $instance_url;
 		$config['id_token'] = $response['id_token'];
 		$config['signature'] = $response['signature'];
-/*
-echo "<pre>";
-	print_r($response);
-	print_r($config);
-echo("</pre>");
-*/
+
 	}
 	$siteurl = site_url(); 
 	update_option("wp_{$skinnyData['activatedplugin']}_settings" , $config );
@@ -38,7 +33,7 @@ echo("</pre>");
 	<div class="wp-common-crm-content" style="width: 600px;float: left;">
 	<table>
 		<tr>
-			<td><label style="font-weight:bold;">Select Plugin</label></td>
+			<td><label id="inneroptions" style="font-weight:bold;">Select Plugin</label></td>
 			<td>
 			<?php
 				$ContactFormPluginsObj = new ContactFormPlugins();
@@ -51,7 +46,7 @@ echo("</pre>");
 		<tr><td><br/></td></tr>
 		<tr>
 			<td style='width:160px;'>
-				<label> Consumer Key  </label><div style='float:right;'> : </div>
+				<label id="innertext"> Consumer Key  </label><div style='float:right;'> : </div>
 			</td>
 			<td>
 				<input type='text' class='smack-salesforce-free-settings-text' name='key' id='smack_host_address' value="<?php echo $config['key'] ?>"/>
@@ -60,7 +55,7 @@ echo("</pre>");
 		</tr>
 		<tr>
 			<td style='width:160px;'>
-				<label> Consumer Secret </label><div style='float:right;'> : </div>
+				<label id="innertext"> Consumer Secret </label><div style='float:right;'> : </div>
 			</td>
 			<td>
 				<input type='password' class='smack-salesforce-free-settings-text' name='secret' id='smack_host_username' value="<?php echo $config['secret'] ?>"/>
@@ -69,7 +64,7 @@ echo("</pre>");
 		</tr>
 		<tr>
 			<td style='width:160px;'>
-				<label> Callback URL </label><div style='float:right;'> : </div>
+				<label id="innertext"> Callback URL </label><div style='float:right;'> : </div>
 			</td>
 			<td>
 				<input type='text' class='smack-salesforce-free-settings-text' name='callback' id='smack_host_access_key' value="<?php echo $config['callback'] ?>"/>
@@ -82,7 +77,7 @@ echo("</pre>");
 		</tr>
 		<tr>
 			<td style='width:160px;'>
-				<label><div style='float:left;'> Capture Registering User  </div></label>
+				<label id="innertext"><div style='float:left;'> Capture Registering User  </div></label>
 			</td>
 			<td>
 				<input type='checkbox' class='smack-salesforce-settings-text' name='user_capture' id='user_capture' value="on" <?php if(isset($config['user_capture']) && $config['user_capture'] == 'on') { echo "checked=checked"; } ?>/>
@@ -92,11 +87,11 @@ echo("</pre>");
 
 	</table>
 	<br/>
-<h5  style="font-weight:bold;">Email Notification</h5>
+<h5 id="inneroptions" style="font-weight:bold;">Email Notification</h5>
 <table>
                 <tr>
                         <td style='width:160px;'>
-                                <label><div style='float:left;'> Email All Captured Data</div></label>
+                                <label id="innertext"><div style='float:left;'> Email All Captured Data</div></label>
                         </td>
                         <td>
                                 <input type='checkbox' class='smack-salesforce-settings-text' name='smack_email' id='smack_email' value="on" <?php if(isset($config['smack_email']) && $config['smack_email'] == 'on') { echo "checked=checked"; } ?>/>
@@ -105,7 +100,7 @@ echo("</pre>");
 		 <tr><td><br></td></tr>
                 <tr>
                         <td style='width:160px;'>
-                                <label><div style='float:left;'> Email Id </div></label>
+                                <label id="innertext"><div style='float:left;'> Email Id </div></label>
                         </td>
                         <td>
                      <input type='text' class='smack-salesforce-free-settings-text' name='email' id='email' value="<?php echo $config['email'] ?>"/>
@@ -114,10 +109,10 @@ echo("</pre>");
 </table> 
 		<tr><td><br></td></tr>
 <table>
-	<h5  style="font-weight:bold;">Debug Mode</h5>
+	<h5 id="inneroptions" style="font-weight:bold;">Debug Mode</h5>
 		 <tr>
                                 <td style='width:160px;'>
-                                        <label><div style='float:left;'> Enable Debug Mode  </div></label>
+                                        <label id="innertext"><div style='float:left;'> Enable Debug Mode  </div></label>
                                 </td>
                                 <td>
                                         <input type='checkbox' class='smack-vtiger-settings-text' name='debug_mode' id='debug_mode' value="on" <?php if(isset($config['debug_mode']) && $config['debug_mode'] == 'on') { echo "checked=checked"; } ?>/>

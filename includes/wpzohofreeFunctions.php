@@ -290,6 +290,11 @@ class Functions{
 			$underscored_field = "";
 		}
 
+		if($module_fields['Email_Opt_Out']=='on') 
+		{ 
+			$module_fields['Email_Opt_Out']='true'; 
+		}
+ 
 		foreach($module_fields as $field => $value)
 		{
 			if( array_key_exists($field , $config_underscored_fields) )

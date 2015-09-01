@@ -31,12 +31,12 @@
 	$content1="";
 	$content .= "
 
-	<h3>List of Shortcodes</h3>
+	<h3 id='innerheader'>List of Shortcodes</h3>
 	<div class='wp-common-crm-content'>
-	<table>
-		<tr>
+	<table style='margin-right:20px;margin-bottom:20px;border: 1px solid #dddddd;'>
+		<tr style='border-top: 1px solid #dddddd;'>
 		</tr>
-		<tr class='smack-crm-pro-highlight smack-crm-pro-alt'>
+		<tr class='smack-crm-pro-highlight smack-crm-pro-alt' style='border-top: 1px solid #dddddd;'>
 			<th class='smack-crm-free-list-view-th' style='width: 50px;'>SL</th>
 			<th class='smack-crm-free-list-view-th' style='width: 300px;'>Shortcodes</th>
 			<th class='smack-crm-free-list-view-th' style='width: 90px;'>Type</th>
@@ -67,9 +67,9 @@
 			$content1 .= "<tr class='smack-crm-pro-highlight smack-crm-pro-alt'>";
 		}
 
-		$content1 .= "<td style='text-align:center;'>{$number}</td>";
-		$content1 .= "<td style='text-align:center;'>[{$activatedplugin}-web-form type='{$formtype_key}']</td>";
-		$content1 .= "<td style='text-align:center;'>{$formtype_key}</td>";
+		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>{$number}</td>";
+		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>[{$activatedplugin}-web-form type='{$formtype_key}']</td>";
+		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>{$formtype_key}</td>";
 
 	/*	if( $formtype_key == 'widget' )
 		{
@@ -79,21 +79,21 @@
 		{
 			$content1 .= "<td style='text-align:center;'>No</td>";
 		} */
-		$content1 .= "<td style='text-align:center;'>Admin</td>";
-		$content1 .= "<td style='text-align:center;'>Leads</td>";
+		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>Admin</td>";
+		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>Leads</td>";
 			$successfulAttemptsOption = get_option( "wp-{$activatedplugin}-contact-{$formtype_key}-form-attempts" );
 			$total = $successfulAttemptsOption['total'];
 			$success = $successfulAttemptsOption['success'];			
 			$failure = $total - $success;			
 if(isset($total));
 {
-$content1 .= "<td style='text-align:center;'><span style='color:#000;'>$total</span></td>";
-$content1 .= "<td style='text-align:center;'><span style='color:green;'>$success</span></td>";
-$content1 .= "<td style='text-align:center;'><span style='color:red;'>$failure</span></td>";
+$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'><span style='color:#000;'>$total</span></td>";
+$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'><span style='color:green;'>$success</span></td>";
+$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'><span style='color:red;'>$failure</span></td>";
 
 }
- 		$content1 .= "<td style='text-align:center;'>";
-                $content1 .= "<a href='".WP_CONST_ULTIMATE_CRM_CPT_PLUG_URL."&__module=ManageFields&__action=view&module=Leads&EditShortCode=yes&formtype={$formtype_key}' > Edit </a>";
+ 		$content1 .= "<td style='text-align:center; border-top: 1px solid #dddddd;'>";
+                $content1 .= "<a href='".WP_CONST_ULTIMATE_CRM_CPT_PLUG_URL."&__module=ManageShortcodes&__action=ManageFields&module=Leads&EditShortCode=yes&formtype={$formtype_key}' > Edit </a>";
                 $content1 .= "</td>";
 
 		$content1 .= "</tr>";
@@ -109,7 +109,7 @@ $content1 .= "<td style='text-align:center;'><span style='color:red;'>$failure</
 	<br>
 	<table style = "position:relative;left:450px;">
 	<tr>
-	<td> <input type = "button" size = "50" class = "button-primary" value ="Create More Forms" id ="advance_option" onclick="jQuery('#mandatory-upgrade').show(); jQuery('#mandatory-upgrade').css('display','inline').fadeOut(3000);"> <span id="mandatory-upgrade" style="color:red; display:none;"> Upgrade To Pro </span>
+	<td> <input type = "button" size = "50" class = "button-primary" value ="Create More Forms" id ="advance_option" onclick="jQuery('#mandatory-upgrade').show(); jQuery('#mandatory-upgrade').css('display','inline')"> <span id="mandatory-upgrade" style="color:red; display:none;"> <a href ="https://www.smackcoders.com/wp-leads-builder-any-crm-pro.html"> Upgrade To Pro </a> </span>
 	 </td>
 	<tr>
 	</table> 

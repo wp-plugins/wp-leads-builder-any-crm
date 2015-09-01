@@ -15,7 +15,7 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 		<div class="wp-common-crm-content" style="width: 600px;float: left;">
 		<table>
 			<tr>
-				<td><label style="font-weight:bold;">Select Plugin</label></td>
+				<td><label id="inneroptions" style="font-weight:bold;">Select Plugin</label></td>
 				<td>
 			<?php
 				$ContactFormPluginsObj = new ContactFormPlugins();
@@ -25,10 +25,10 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 			</tr>
 		</table>
 		<table class="settings-table">
-			<tr><td colspan=2 ><h5>VtigerCRM settings</h5></td></tr>
+			<tr><td colspan=2 ><h5 id="inneroptions">VtigerCRM settings</h5></td></tr>
 			<tr>
 				<td style='width:160px;'>
-					<label> Vtiger Url </label><div style='float:right;'> : </div>
+					<label id="innertext"> Vtiger Url </label><div style='float:right;'> : </div>
 				</td>
 				<td>
 					<input type='text' class='smack-vtiger-settings-text' name='url' id='smack_host_address' value="<?php echo $config['url'] ?>"/>
@@ -37,7 +37,7 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 			</tr>
 			<tr>
 				<td style='width:160px;'>
-					<label> Vtiger Username </label><div style='float:right;'> : </div></label>
+					<label id="innertext"> Vtiger Username </label><div style='float:right;'> : </div></label>
 				</td>
 				<td>
 					<input type='text' class='smack-vtiger-settings-text' name='username' id='smack_host_username' value="<?php echo $config['username'] ?>"/>
@@ -46,7 +46,7 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 			</tr>
 			<tr>
 				<td style='width:160px;'>
-					<label> Vtiger Access Key </label><div style='float:right;'> : </div>
+					<label id="innertext"> Vtiger Access Key </label><div style='float:right;'> : </div>
 				</td>
 				<td>
 					<input type='text' class='smack-vtiger-settings-text' name='accesskey' id='smack_host_access_key' value="<?php echo $config['accesskey'] ?>"/>
@@ -58,7 +58,7 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 			</tr>
 			<tr>
 				<td style='width:160px;'>
-					<label><div style='float:left;'> Capture Registering User  </div></label>
+					<label id="innertext"><div style='float:left;'> Capture Registering User  </div></label>
 				</td>
 				<td>
 					<input type='checkbox' class='smack-vtiger-settings-text' name='user_capture' id='user_capture' value="on" <?php if(isset($config['user_capture']) && $config['user_capture'] == 'on') { echo "checked=checked"; } ?>/>
@@ -67,11 +67,11 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 
 		</table>
 		<br/>
-<h5  style="font-weight:bold;">Email Notification</h5>
+<h5 id="inneroptions" style="font-weight:bold;">Email Notification</h5>
 <table>
                 <tr>
                         <td style='width:160px;'>
-                                <label><div style='float:left;'> Email All Captured Data</div></label>
+                                <label id="innertext"><div style='float:left;'> Email All Captured Data</div></label>
                         </td>
                         <td>
                                 <input type='checkbox' class='smack-vtiger-settings-text' name='smack_email' id='smack_email' value="on" <?php if(isset($config['smack_email']) && $config['smack_email'] == 'on') { echo "checked=checked"; } ?>/>
@@ -80,7 +80,7 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 		<tr><td><br></td></tr>
                 <tr>
                         <td style='width:160px;'>
-                                <label><div style='float:left;'> Email Id </div></label>
+                                <label id="innertext"><div style='float:left;'> Email Id </div></label>
                         </td>
                         <td>
                      <input type='text' class='smack-sugar-pro-settings-text' name='email' id='email' value="<?php echo $config['email'] ?>"/>
@@ -89,10 +89,10 @@ $config = get_option("wp_{$skinnyData['activatedplugin']}_settings");
 </table>
  <tr><td><br></td></tr>
 	<table> 
-		<h5  style="font-weight:bold;">Debug Mode</h5>
+		<h5 id="inneroptions" style="font-weight:bold;">Debug Mode</h5>
 		<tr>
                                 <td style='width:160px;'>
-                                        <label><div style='float:left;'> Enable Debug Mode  </div></label>
+                                        <label id="innertext"><div style='float:left;'> Enable Debug Mode  </div></label>
                                 </td>
                                 <td>
                                         <input type='checkbox' class='smack-vtiger-settings-text' name='debug_mode' id='debug_mode' value="on" <?php if(isset($config['debug_mode']) && $config['debug_mode'] == 'on') { echo "checked=checked"; } ?>/>

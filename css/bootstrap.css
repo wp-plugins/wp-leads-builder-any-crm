@@ -4512,7 +4512,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar {
     position: relative;
-    min-height: 50px;
+    min-height: 40px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     background-color:#222222 !important;
@@ -4543,6 +4543,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
     .navbar {
         margin-top:25px;
         margin-right:15px;
+	height:42px;
     }
 }
 
