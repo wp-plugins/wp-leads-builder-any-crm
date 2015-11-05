@@ -24,4 +24,4 @@
 </nav>
 <?php if( !is_plugin_active('wp-leads-builder-any-crm/index.php')) { ?>
 <p style="text-align:center;font-size:15px;color:red;"> Alert: Old plugin is still active, deactivate and delete it now.</p>
-<? } ?>
+<?php } ?>

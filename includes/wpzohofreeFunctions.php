@@ -260,12 +260,11 @@ class Functions{
 	public function createRecord( $module , $module_fields )
 	{
 		$client = $this->login();
-
+		$module = "Leads";
 		global $HelperObj;
                 $WPCapture_includes_helper_Obj = new WPCapture_includes_helper();
                 $activateplugin = $WPCapture_includes_helper_Obj->ActivatedPlugin;
 		$moduleslug = $this->ModuleSlug = rtrim( strtolower($module) , "s");
-
 		$config_fields = get_option("smack_{$activateplugin}_{$moduleslug}_fields-tmp");
 
 		$underscored_field = "";
@@ -319,10 +318,15 @@ class Functions{
                         }
                 }
 
+/*		foreach($module_fields as $key => $value)
+                {
+                $key = preg_replace('/_/',' ',$key);
+                $module_field[$key] = $value;
+                }
+                $module_fields = $module_field;*/
+
                 $postfields .= "</row>\n</$module>";
-
                 $record = $client->insertRecord( $module , "insertRecords" , $this->authtoken ,  $postfields );
-
 		if( isset($record['result']['message']) && ( $record['result']['message'] == "Record(s) added successfully" ) )
 		{
 			$data['result'] = "success";
@@ -335,6 +339,7 @@ class Functions{
 			$data['reason'] = "failed adding entry";
 		}
 		return $data;
+
 	}
 	
 	public function updateRecord( $module , $module_fields , $ids_present )

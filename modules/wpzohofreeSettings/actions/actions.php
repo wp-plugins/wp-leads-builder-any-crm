@@ -30,6 +30,7 @@ class WpzohoSettingsActions extends SkinnyActions {
 			'password' => __('Zoho Password'),
 
 			'user_capture' => __('User Capture'),
+			'contact_form' => __('Contact Form'),
 			'smack_email' => __('Smack Email'),
 			 'email' => __('Email id'),
 			 'debug_mode' => __('Debug Mode'),

@@ -2,7 +2,7 @@
 /******************************
 Plugin Name: WP Leads Builder For Any CRM 
 Description: A plugin that helps to capture leads.
-Version: 1.1.1
+Version: 1.2.1
 Author: smackcoders.com
 Plugin URI: http://www.smackcoders.com
 Author URI: http://www.smackcoders.com
@@ -13,7 +13,7 @@ define('WP_CONST_ULTIMATE_CRM_CPT_URL', 'http://www.smackcoders.com');
 define('WP_CONST_ULTIMATE_CRM_CPT_NAME', 'WP Leads Builder For Any CRM');
 define('WP_CONST_ULTIMATE_CRM_CPT_SLUG', 'wp-leads-builder-any-crm');
 define('WP_CONST_ULTIMATE_CRM_CPT_SETTINGS', 'WP Leads Builder For Any CRM');
-define('WP_CONST_ULTIMATE_CRM_CPT_VERSION', '1.1');
+define('WP_CONST_ULTIMATE_CRM_CPT_VERSION', '1.2.1');
 define('WP_CONST_ULTIMATE_CRM_CPT_DIR', WP_PLUGIN_URL . '/' . WP_CONST_ULTIMATE_CRM_CPT_SLUG . '/');
 define('WP_CONST_ULTIMATE_CRM_CPT_DIRECTORY', plugin_dir_path( __FILE__ ));
 define('WP_CONST_ULTIMATE_CRM_CPT_PLUG_URL',site_url().'/wp-admin/admin.php?page='.WP_CONST_ULTIMATE_CRM_CPT_SLUG.'/index.php');
@@ -79,6 +79,16 @@ $active_plugins = get_option("active_plugins");
 	add_action('admin_init', 'action_crm_init');
 	add_action( 'profile_update', array( 'CapturingProcessClass' , 'capture_registering_users' ) );
 	add_action( 'user_register', array( 'CapturingProcessClass' , 'capture_registering_users' ) );
+
+	$WPCapture_includes_helper_Obj = new WPCapture_includes_helper();
+	$activateplugin = $WPCapture_includes_helper_Obj->ActivatedPlugin;
+
+	$contact = get_option("wp_{$activateplugin}_settings");
+        if($contact['contact_form'] == 'on')
+        {
+		require_once('templates/contact_form_field_handling.php');
+	} 
+
 
 	function StartSession() {
 	    if(!session_id()) {

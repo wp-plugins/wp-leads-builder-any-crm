@@ -190,6 +190,7 @@ class Functions{
 
 	public function createRecord( $module , $module_fields )
 	{
+		$module = "Leads";
 		$client_array = $this->login();
 		$client = $client_array['clientObj'];
 

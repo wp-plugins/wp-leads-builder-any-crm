@@ -37,7 +37,8 @@ class ManageShortcodesActions extends SkinnyActions {
 
 	public function executeManageFields($request)
 	{
-
+	
+		
 		$data = array();
 
 		foreach( $request as $key => $REQUESTS )
@@ -57,7 +58,6 @@ class ManageShortcodesActions extends SkinnyActions {
 		$data['plugin_url']= WP_CONST_ULTIMATE_CRM_CPT_DIRECTORY;
 		$data['onAction'] = 'onCreate';
 		$data['siteurl'] = site_url();
-
 		if(isset($data['REQUEST']['formtype']))
 		{
 			$data['formtype'] = $data['REQUEST']['formtype'];
@@ -66,7 +66,6 @@ class ManageShortcodesActions extends SkinnyActions {
 		{
 			$data['formtype'] = "post";
 		}
-
 		if(isset($data['REQUEST']['EditShortCode']) && ( $data['REQUEST']['EditShortCode'] == "yes" ) )
 		{
 			$data['option'] = $data['options'] = "smack_{$data['activatedplugin']}_lead_{$data['formtype']}_field_settings"; // final output sample 'smack_wptigerfree_lead_post_field_settings //'smack_wp_vtiger_fields_shortcodes';
@@ -98,6 +97,12 @@ if (isset ($_POST['formtype'])) {
 			echo $formFields['display'];
 		}
 	}
+
+
+//		if($thirdPartyPlugin == 'contactform' && !empty($request['POST']))        {
+  //                                      $obj->formatContactFields($request['GET']['EditShortcode']);
+  //                              }
+
                 return $data;
 	}
 
@@ -117,7 +122,6 @@ function saveFormFields( $options , $onAction , $editShortCodes ,  $request , $f
 	$save_field_config = array();
 
 
-
 if( isset($request['REQUEST']['bulkaction']))
 {
 $action = $request['REQUEST']['bulkaction'];
@@ -125,104 +129,179 @@ $SaveFields = new SaveFields();
 switch($action)
 {
 case 'enable_field':
-	$SaveFields->enableField( $request );
+	$save_field_config = $SaveFields->enableField( $request );
 	break;
 
 case 'disable_field':
-	$SaveFields->disableField($request);
+	$save_field_config = $SaveFields->disableField($request);
 	break;
 
 
 case 'update_order':
-	$SaveFields->updateOrder($request);
+	$save_field_config = $SaveFields->updateOrder($request);
 	break;
 }
-	
-} 
 
+//echo "<pre>";print_r($save_field_config);echo "</pre>";
+$i =0;
+foreach($save_field_config as $key=>$val)
+{
 
-	
-
-
-
-/*	$config_fields = get_option( "smack_{$activatedplugin}_lead_{$formtype}_field_settings" );
-
-	if( !is_array( $config_fields ) )
+	foreach($val as $key=>$value)
 	{
-		$config_fields = get_option("smack_{$activatedplugin}_{$moduleslug}_fields-tmp");	
-	}
-
-	foreach( $config_fields as $shortcode_attributes => $fields )
-	{
-		if($shortcode_attributes == "fields")
+	$i++;
+	if($value['publish'] == 1)
 		{
-			foreach( $fields as $key => $field )
+		$enable_fields[$i]['label'] = $value['label'];
+		$enable_fields[$i]['name'] = $value['name'];
+		$enable_fields[$i]['wp_mandatory'] = $value['wp_mandatory'];
+		foreach($value['type'] as $key=>$val)
 			{
-				$save_field_config["fields"][$key] = $field;
-				if( !isset($field['mandatory']) || $field['mandatory'] != 2 )
+				if($key == 'name')
 				{
-					if(isset($_POST['select'.$key]))
-					{
-						$save_field_config['fields'][$key]['publish'] = 1;
-					}
-					else
-					{
-						$save_field_config['fields'][$key]['publish'] = 0;
-					}
+				$enable_fields[$i]['type'] = $val;
 				}
-				else
-				{
-					$save_field_config['fields'][$key]['publish'] = 1;
-				}
+			}	
+		foreach($value['type']['picklistValues'] as $key=>$valuee )
+			{
+				
+				$enable_fields[$i]['pickvalue'] = $value['type']['picklistValues'];//print_r($enable_field[$i][$j]['pickvalue']);
 			}
-		}
-		else
-		{
-			$save_field_config[$shortcode_attributes] = $fields;
-		}
-	}
-*/
+ 		}
 
-/*	$extra_fields = array( "enableurlredirection" , "redirecturl" , "errormessage" , "successmessage");
+//print_r($enable_fields[$i]['pickvalue']);
+	} 
+}
 
-	foreach( $extra_fields as $extra_field )
+$WPCapture_includes_helper_Obj = new WPCapture_includes_helper();
+$activateplugin = $WPCapture_includes_helper_Obj->ActivatedPlugin;
+
+$contact = get_option("wp_{$activateplugin}_settings");
+
+	if($contact['contact_form'] == 'on')
 	{
-		if(isset( $_POST[$extra_field]))
-		{
-			$save_field_config[$extra_field] = $_POST[$extra_field];
-		}
-		else
-		{
-			unset($save_field_config[$extra_field]);
-		}
+	$obj = new SaveFields();
+	$obj->formatContactFields($enable_fields,$activateplugin,$formtype);
 	}
-
-	for( $i = 0; $i < $_REQUEST['no_of_rows']; $i++ )
-	{
-		$REQUEST_DATA[$i] = $_REQUEST['position'.$i];
-	}
-
-	asort($REQUEST_DATA);
-
-	$i = 0;
-	foreach( $REQUEST_DATA as $key => $value )
-	{
-		$Ordered_field_config['fields'][$i] = $save_field_config['fields'][$key];
-		$i++;
-	}
-
-	$save_field_config['fields'] = $Ordered_field_config['fields']; 
-
-	update_option("smack_{$activatedplugin}_lead_{$formtype}_field_settings", $save_field_config);
-	update_option("smack_{$activatedplugin}_{$moduleslug}_fields-tmp" , $save_field_config);
-*/
-
-	
-
+}	
 	$data['display'] = "<p class='display_success'> Field Settings Saved </p>";
 	return $data;
 }
 
+public function formatContactFields($enable_fields,$activateplugin,$formtype)
+{
+//echo "<pre>";print_r($enable_fields);echo "</pre>";
+	update_option('contact_enable_fields',$enable_fields);
+	foreach($enable_fields as $key=>$value)
+	{
+//echo "<pre>";	print_r($value);
+	$type = $value['type'];
+	$labl = $value['label'];
+	$label = preg_replace('/\/| |\(|\)|\?/','_',$labl);
+
+	$mandatory =$value['wp_mandatory'];
+	//		$cont_array = array();
+                        $cont_array = $value['pickvalue'];
+                        $string ="";
+	//		print_r($cont_array);
+                        foreach($cont_array as $val) {
+				
+                                $string .= "\"{$val['label']}\" ";
+                        }
+                        $str = rtrim($string,',');
+		if($mandatory == 0)
+                                {
+                                        $man ="";
+                                }
+                         else
+                                {
+                                        $man ="*";
+                                }
+		switch($type)
+                {
+                        case 'phone':
+                        case 'currency':
+                        case 'text':
+                        case 'integer':
+                        case 'string':
+                                $contact_array .= "<p>".  $label ."".$man. "<br />
+                                                 [text".$man." ".  $label."] </p>" ;
+                                break;
+
+                        case 'email':
+                                $contact_array .= "<p>".  $label ."".$man. "<br /> 
+                                                [email".$man." ". $label."] </p>" ;
+                                break;
+                        case 'url':
+                                $contact_array .= "<p>".  $label ."".$man. "<br />
+                                                [url".$man." ". $label."] </p>" ;
+                                break;
+                        case 'picklist':
+                                $contact_array .= "<p>".  $label ."".$man. "<br />
+                                                [select".$man." ". $label." " .$str."] </p>" ;
+                                $str ="";
+                                break;
+                        case 'boolean':
+                                $contact_array .= "<p>
+                                                [checkbox".$man." ". $label." "."label_first "."\" $label\""."] </p>" ;                
+                                break;
+                        case 'date':
+                                $contact_array .= "<p>".  $label ."".$man. "<br />
+                                            [date".$man." ". $label." min:1950-01-01 max:2050-12-31 placeholder \"YYYY-MM-DD\"] </p>" ;
+			          break;
+                        case '':
+                                $contact_array .= "<p>".  $label ."".$man. "<br />
+                                                 [text".$man." ".  $label."] </p>" ;
+                               break;
+
+                        default:
+
+                                break;
+
+                }
+
+	}
+//print_r($contact_array);
+	$contact_array .= "<p><br /> [submit "." \"Submit\""."]</p>";
+        $meta = $contact_array;
+	
+	$shortcode = "[{$activateplugin}-web-form type='{$formtype}']";
+	$title = "{$activateplugin}-web-form type='{$formtype}'";
+	$checkid = get_option($shortcode);
+	if(empty($checkid))
+	{
+		$contform = array (
+                        'post_title'  => $shortcode,
+                        'post_content'=> $contact_array,
+                        'post_type'   => 'wpcf7_contact_form',
+                        'post_status' => 'publish',
+                        'post_name'   => $shortcode
+                                  );
+        	$id = wp_insert_post($contform);
+        	$content2 = "[contact-form-7 id=\"$id\" title=\"$title\"]";
+       		 $contform2 = array (
+                'post_title'  => $id,
+                'post_content'=> $content2,
+                'post_type'   => 'post',
+                'post_status' => 'publish',
+                'post_name'   => $id
+                );
+        wp_insert_post($contform2);
+
+        $post_id = $id;
+        $meta_key ='_form';
+        $meta_value = $meta;
+        update_post_meta($post_id,$meta_key,$meta_value);
+	update_option($shortcode,$id);
+	}
+	else
+	{
+
+	global $wpdb;
+	$wpdb->query("update $wpdb->posts set post_content='{$contact_array}' where ID={$checkid}");
+        $wpdb->query("update $wpdb->postmeta set meta_value='{$meta}' where post_id={$checkid} and meta_key='_form'");	
+	}
+}
 
 
 public function enableField($data)
@@ -230,7 +309,6 @@ public function enableField($data)
 
 
 $config_fields = get_option( "smack_{$data['activatedplugin']}_lead_{$data['REQUEST']['formtype']}_field_settings" );
-
 
 	if( !is_array( $config_fields['fields'] ) )
 	{
@@ -262,10 +340,12 @@ $config_fields = get_option( "smack_{$data['activatedplugin']}_lead_{$data['REQU
 		{
 			$save_field_config[$shortcode_attributes] = $fields;
 		}
+
 	}
 
 update_option("smack_{$data['activatedplugin']}_lead_{$data['REQUEST']['formtype']}_field_settings", $save_field_config);
 	update_option("smack_{$data['activatedplugin']}_{$data['moduleslug']}_fields-tmp" , $save_field_config);
+	return $save_field_config;
 }
 
 public function disableField($data)
@@ -309,6 +389,7 @@ $config_fields = get_option( "smack_{$data['activatedplugin']}_lead_{$data['REQU
 	}
 update_option("smack_{$data['activatedplugin']}_lead_{$data['REQUEST']['formtype']}_field_settings", $save_field_config);
 	update_option("smack_{$data['activatedplugin']}_{$data['moduleslug']}_fields-tmp" , $save_field_config);
+	return $save_field_config;
 }
 
 
@@ -367,6 +448,7 @@ $extra_fields = array( "enableurlredirection" , "redirecturl" , "errormessage" ,
 	$save_field_config['fields'] = $Ordered_field_config['fields']; 
 	update_option("smack_{$data['activatedplugin']}_lead_{$data['REQUEST']['formtype']}_field_settings", $save_field_config);
 	update_option("smack_{$data['activatedplugin']}_{$data['moduleslug']}_fields-tmp" , $save_field_config);
+	return $save_field_config;
 }
 
 }
@@ -383,3 +465,11 @@ class CallManageShortcodesCrmObj extends ManageShortcodesActions
 		return self::$_instance;
 	}
 }// CallSugarShortcodeCrmObj Class Ends
+
+
+/*	public function formatContactFields($shortcode)
+	{
+
+
+
+	} */

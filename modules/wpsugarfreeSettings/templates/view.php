@@ -74,6 +74,23 @@ if( isset($_POST["smack-sugar-settings-form"]) )
 			</td>
 		</tr>
 
+	<table>
+                <h5 id="inneroptions" style="font-weight:bold;">Contact Form 7</h5>
+                <tr>
+                                <td style='width:160px;'>
+                                        <label id="innertext"><div style='float:left;'> Enable Contact Form 7  </div></label>
+                                </td>
+                                <td>
+                                        <input type='checkbox' class='smack-vtiger-settings-text' name='contact_form' id='contact_form' value="on" <?php if(isset($config['contact_form']) && $config['contact_form'] == 'on') { echo "checked=checked"; } ?>/>
+                                </td>
+                </tr>
+
+
+
+        </table>
+        <tr><td><br></td></tr>
+
+
 
 	</table>
 	<br/>

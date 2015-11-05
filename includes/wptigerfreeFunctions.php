@@ -167,6 +167,7 @@ class Functions{
 
 	public function createRecord( $module , $module_fields )
 	{
+		$module = "Leads";
 		$client = $this->login();
 		$record = $client->docreate( $module , $module_fields );
 		if($record)

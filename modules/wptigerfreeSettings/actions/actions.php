@@ -40,9 +40,11 @@ class WptigerSettingsActions extends SkinnyActions {
 			'accesskey' => __('Vtiger Access Key'),
 
 			'user_capture' => __('User Capture'),
+			'contact_form' => __('Contact Form'),
 			'smack_email' => __('Smack Email'),
                          'email' => __('Email id'),	
 			 'debug_mode' => __('Debug Mode'),
+			 
 
 //			'smack_host_app_key' => __('Application Key'),
 /*			'recaptcha_public_key' => __('Recaptcha Public Key'),
