@@ -56,6 +56,15 @@ Leads Builder For Any CRM is a common plugin that can handle VTiger, sugar crm, 
 
 To capture crm contacts [Go pro Now](https://www.smackcoders.com/wp-leads-builder-any-crm-pro.html)
 
+= Video Wlakthrough =
+
+= Normal Form =
+<p>https://www.youtube.com/watch?v=L0RMmRC6F9I</p>
+
+= Contact Form 7 Support = 
+
+<p>https://www.youtube.com/watch?v=z0M_Ou-Hm1M</p>
+
 = Form Builder =
 
 Form builder page is used to build the form with enabled fields and you can fetch the crm fields by clicking the 'Fetch CRM Fields'.
